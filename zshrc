@@ -128,7 +128,6 @@ export JAVA_OPTS="-Dfile.encoding=UTF8"
 #export JDK_HOME=$JAVA_HOME
 export GROOVY_HOME=$(brew --prefix groovy)/libexec
 export SCALA_HOME=$(brew --prefix scala)/libexec
-export ANT_HOME="$HOME/Documents/work/elisa/gitprojects/devel/common/ant"
 export M2_OPTS="-Xms64m -Xmx1024m -XX:PermSize=64m -XX:MaxPermSize=256m -XX:+CMSClassUnloadingEnabled"
 export ANT_OPTS="-ea -Xmx4048M -Xms1024M -XX:PermSize=512M -XX:MaxPermSize=1024M -Djavax.net.ssl.trustStore=$HOME/Documents/work/elisa/gitprojects/devel/software/viihde-ui-dist/artifactorykeystore"
 
@@ -143,10 +142,10 @@ export PYTHONPATH=/usr/local/lib/python:$PYTHONPATH
 export DOCKER_HOST=tcp://192.168.59.103:2375
 export LEIN_JAVA_CMD=$(brew --prefix drip)/bin/drip
 
-export AWS_ACCESS_KEY="AKIAJTZXI22WCBDGSL2Q"\
-       AWS_SECRET_KEY="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"\
-       EC2_AMITOOL_HOME="/usr/local/Cellar/ec2-ami-tools/1.5.2/libexec"\
-       EC2_HOME="/usr/local/Cellar/ec2-api-tools/1.6.13.0/libexec"
+export AWS_ACCESS_KEY="$(pass aws/aki/access_key)"\
+       AWS_SECRET_KEY="$(pass aws/aki/secret_key)"\
+       EC2_AMITOOL_HOME="$(brew --prefix ec2-ami-tools)/libexec"\
+       EC2_HOME="$(brew --prefix ec2-api-tools)/libexec"
 
 #
 # Customize to your needs...
