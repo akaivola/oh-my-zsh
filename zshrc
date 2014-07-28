@@ -139,7 +139,7 @@ export ACK_PAGER_COLOR='less -X -R -F'
 export NODE_PATH="/usr/local/share/npm/lib/node_modules"
 export PYTHONPATH=/usr/local/lib/python:$PYTHONPATH
 #export DOCKER_HOST=tcp://localhost:2375
-export DOCKER_HOST=tcp://192.168.59.103:2375
+export DOCKER_HOST=tcp://:2375
 export LEIN_JAVA_CMD=$(brew --prefix drip)/bin/drip
 
 export AWS_ACCESS_KEY="$(pass aws/aki/access_key)"\
