@@ -91,6 +91,9 @@ alias b2d="boot2docker"
 alias b2ds="boot2docker ssh"
 alias b2ip="boot2docker ip 2>/dev/null"
 
+#node aliases
+alias nr="NODE_NO_READLINE=1 rlwrap node"
+
 #Emacs
 alias emc="emacsclient"
 
