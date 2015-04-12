@@ -85,11 +85,15 @@ alias dockercleancontainers="docker ps -a --no-trunc| grep 'Exit' | awk '{print 
 alias dockercleanimages="docker images -a --no-trunc | grep none | awk '{print \$3}' | xargs -L 1 docker rmi"
 alias dockerclean="dockercleancontainers && dockercleanimages"
 #alias dps="docker ps | q -bH1 'select c1, c2, c3 from -' | column -t"
-alias dps="docker ps | sed -e 's/  /\+/g' -e 's/CONTAINER ID/CONTAINER_ID/' | tr -s '+' '\t' | q -t 'select c1,substr(c7, 0, 40),c2,c6 from -' | column -t"
+alias dps="docker ps | sed -e 's/  /\+/g' -e 's/CONTAINER ID/CONTAINER_ID/' | tr -s '+' '\t' | tail -n+2 | q -t 'select c1,substr(c7, 0, 40),c2,c6 from -' | column -t"
 alias drun="docker run -t -i --rm"
 alias b2d="boot2docker"
 alias b2ds="boot2docker ssh"
 alias b2ip="boot2docker ip 2>/dev/null"
+
+#fig aliases
+alias figreset="fig kill && fig rm --force && fig build"
+alias fig="nocorrect fig"
 
 #node aliases
 alias nr="NODE_NO_READLINE=1 rlwrap node"
@@ -105,6 +109,11 @@ gitgrep() {
 f() {
   find . -iname "$*" 2>/dev/null
 }
+
+#rbenv
+eval "$(rbenv init -)"
+rbenv rehash
+export RBENV_VERSION="2.2.0"
 
 
 # Speed up git completion
