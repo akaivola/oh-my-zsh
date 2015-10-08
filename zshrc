@@ -153,7 +153,7 @@ export PYTHONPATH=/usr/local/lib/python:$PYTHONPATH
 eval "$(docker-machine env dev)"
 export LEIN_JAVA_CMD=$(brew --prefix drip)/bin/drip
 
-export HOMEBREW_GITHUB_API_TOKEN="5e8f124d77c70181243e8a479ad6fa3e5f04a0ad"
+source ~/.homebrew_api_token
 
 export AWS_ACCESS_KEY="$(pass aws/aki/access_key)"\
        AWS_SECRET_KEY="$(pass aws/aki/secret_key)"\
