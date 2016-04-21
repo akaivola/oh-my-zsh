@@ -65,13 +65,6 @@ alias POST='http POST'
 alias DELETE='http DELETE'
 alias OPTIONS='http OPTIONS'
 
-# aliases for common hostnames
-alias -g VAD='viihde-agnes-devapijava1'
-alias -g VARC1='viihde-agnes-rcapijava1'
-alias -g VARC2='viihde-agnes-rcapijava2'
-alias -g VA1='viihde-agnes-apijava1'
-alias -g VA2='viihde-agnes-apijava2'
-
 # alias for emacs
 alias ec='emacsclient -c'
 
@@ -150,8 +143,9 @@ export ACK_PAGER_COLOR='less -X -R -F'
 #export REBEL_HOME=/home/aki/Programs/jrebel
 export NODE_PATH="/usr/local/share/npm/lib/node_modules"
 export PYTHONPATH=/usr/local/lib/python:$PYTHONPATH
-eval "$(docker-machine env dev)"
+eval "$(docker-machine env oph)"
 export LEIN_JAVA_CMD=$(brew --prefix drip)/bin/drip
+export ANDROID_HOME=$(brew --prefix android-sdk)
 
 source ~/.homebrew_api_token
 
@@ -165,6 +159,9 @@ export AWS_ACCESS_KEY="$(pass aws/aki/access_key)"\
 export PATH=.:/usr/local/sbin:/usr/local/bin:/usr/local/share/npm/bin:$(brew --prefix ruby)/bin:$M2_HOME/bin:$PATH:$GROOVY_HOME/bin:$HOME/bin:$(brew --prefix go)/libexec/bin:/usr/local/share/pypy
 
 unsetopt share_history
+
+# Autojump
+[[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
 
 
 # Give me my bash style incremental search
@@ -189,3 +186,5 @@ noop() {}
 zle -N noop
 bindkey '^[[I' noop
 bindkey '^[[O' noop
+
+
