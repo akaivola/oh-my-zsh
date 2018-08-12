@@ -1,3 +1,4 @@
+export PATH=/usr/local/sbin:/usr/local/bin:$PATH
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
@@ -143,20 +144,23 @@ export ACK_PAGER_COLOR='less -X -R -F'
 #export REBEL_HOME=/home/aki/Programs/jrebel
 export NODE_PATH="/usr/local/share/npm/lib/node_modules"
 export PYTHONPATH=/usr/local/lib/python:$PYTHONPATH
-eval "$(docker-machine env oph)"
 export LEIN_JAVA_CMD=$(brew --prefix drip)/bin/drip
-export ANDROID_HOME=$(brew --prefix android-sdk)
+export ANDROID_SDK_ROOT="/usr/local/share/android-sdk"
+export ANDROID_HOME=$ANDROID_SDK_ROOT
+export ANDROID_NDK_HOME="/usr/local/share/android-ndk"
+export NVM_DIR="$HOME/.nvm"
+. "/usr/local/opt/nvm/nvm.sh"
 
 source ~/.homebrew_api_token
 
-export AWS_ACCESS_KEY="$(pass aws/aki/access_key)"\
-       AWS_SECRET_KEY="$(pass aws/aki/secret_key)"\
-       EC2_AMITOOL_HOME="$(brew --prefix ec2-ami-tools)/libexec"\
-       EC2_HOME="$(brew --prefix ec2-api-tools)/libexec"
+#export AWS_ACCESS_KEY="$(pass aws/aki/access_key)"\
+#       AWS_SECRET_KEY="$(pass aws/aki/secret_key)"\
+#       EC2_AMITOOL_HOME="$(brew --prefix ec2-ami-tools)/libexec"\
+#       EC2_HOME="$(brew --prefix ec2-api-tools)/libexec"
 
 #
 # Customize to your needs...
-export PATH=.:/usr/local/sbin:/usr/local/bin:/usr/local/share/npm/bin:$(brew --prefix ruby)/bin:$M2_HOME/bin:$PATH:$GROOVY_HOME/bin:$HOME/bin:$(brew --prefix go)/libexec/bin:/usr/local/share/pypy
+export PATH=.:/usr/local/share/npm/bin:$(brew --prefix ruby)/bin:$M2_HOME/bin:$PATH:$GROOVY_HOME/bin:$HOME/bin:$(brew --prefix go)/libexec/bin:/usr/local/share/pypy
 
 unsetopt share_history
 
