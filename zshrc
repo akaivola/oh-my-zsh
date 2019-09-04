@@ -160,7 +160,7 @@ source ~/.homebrew_api_token
 
 #
 # Customize to your needs...
-export PATH=.:/usr/local/share/npm/bin:$(brew --prefix ruby)/bin:$M2_HOME/bin:$PATH:$GROOVY_HOME/bin:$HOME/bin:$(brew --prefix go)/libexec/bin:/usr/local/share/pypy
+export PATH=.:/usr/local/share/npm/bin:$(brew --prefix ruby)/bin:$M2_HOME/bin:$PATH:$GROOVY_HOME/bin:$HOME/bin:$(brew --prefix go)/libexec/bin:/usr/local/share/pypy:~/.cargo/bin
 
 unsetopt share_history
 
@@ -191,4 +191,8 @@ zle -N noop
 bindkey '^[[I' noop
 bindkey '^[[O' noop
 
+# Appends every command to the history file once it is executed
+setopt inc_append_history
+# # Reloads the history whenever you use it
+setopt share_history
 
