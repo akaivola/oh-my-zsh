@@ -69,10 +69,7 @@ alias OPTIONS='http OPTIONS'
 # alias for emacs
 alias ec='emacsclient -c'
 
-alias gradle='JAVA_HOME=$(/usr/libexec/java_home -v 1.7) gradle --daemon'
 alias ag='ag --pager less'
-
-alias hssh='ssh -t huussi sudo ssh'
 
 # docker aliases
 alias dockercleancontainers="docker ps -a --no-trunc| grep 'Exit' | awk '{print \$1}' | xargs -L 1 docker rm"
@@ -81,16 +78,6 @@ alias dockerclean="dockercleancontainers && dockercleanimages"
 #alias dps="docker ps | q -bH1 'select c1, c2, c3 from -' | column -t"
 alias dps="docker ps | sed -e 's/  /\+/g' -e 's/CONTAINER ID/CONTAINER_ID/' | tr -s '+' '\t' | tail -n+2 | q -t 'select c1,substr(c7, 0, 40),c2,c6 from -' | column -t"
 alias drun="docker run -t -i --rm"
-alias b2d="boot2docker"
-alias b2ds="boot2docker ssh"
-alias b2ip="boot2docker ip 2>/dev/null"
-
-#fig aliases
-alias figreset="fig kill && fig rm --force && fig build"
-alias fig="nocorrect fig"
-
-#node aliases
-alias nr="NODE_NO_READLINE=1 rlwrap node"
 
 #Emacs
 alias emc="emacsclient"
@@ -103,12 +90,6 @@ gitgrep() {
 f() {
   find . -iname "$*" 2>/dev/null
 }
-
-#rbenv
-eval "$(rbenv init -)"
-rbenv rehash
-export RBENV_VERSION="2.2.0"
-
 
 # Speed up git completion
 # http://talkings.org/post/5236392664/zsh-and-slow-git-completion
@@ -129,22 +110,19 @@ zstyle ':completion:*:approximate:*' max-errors 1 numeric
 
 export EDITOR=/usr/bin/vim
 #export VISUAL=/usr/local/bin/mvim
-export JAVA_HOME="$(/usr/libexec/java_home)"
-export JAVA_OPTS="-Dfile.encoding=UTF8"
+#export JAVA_HOME="$(/usr/libexec/java_home)"
 #export JDK_HOME=$JAVA_HOME
-export GROOVY_HOME=$(brew --prefix groovy)/libexec
-export SCALA_HOME=$(brew --prefix scala)/libexec
-export M2_OPTS="-Xms64m -Xmx1024m -XX:PermSize=64m -XX:MaxPermSize=256m -XX:+CMSClassUnloadingEnabled"
-export ANT_OPTS="-ea -Xmx4048M -Xms1024M -XX:PermSize=512M -XX:MaxPermSize=1024M -Djavax.net.ssl.trustStore=$HOME/Documents/work/elisa/gitprojects/devel/software/viihde-ui-dist/artifactorykeystore"
+export JAVA_OPTS="-Dfile.encoding=UTF8"
+#export GROOVY_HOME=$(brew --prefix groovy)/libexec
+export SCALA_HOME=/usr/local/opt/scala/2.13.1/libexec
 
-export MAVEN_OPTS=$M2_OPTS
-export M2_HOME=$(brew --prefix maven)/libexec
+export M2_HOME=/usr/local/opt/maven/libexec
 export ACK_PAGER='less -X -F'
 export ACK_PAGER_COLOR='less -X -R -F'
 #export REBEL_HOME=/home/aki/Programs/jrebel
 export NODE_PATH="/usr/local/share/npm/lib/node_modules"
 export PYTHONPATH=/usr/local/lib/python:$PYTHONPATH
-export LEIN_JAVA_CMD=$(brew --prefix drip)/bin/drip
+export LEIN_JAVA_CMD=/usr/local/opt/drip/bin/drip
 export ANDROID_SDK_ROOT="/usr/local/share/android-sdk"
 export ANDROID_HOME=$ANDROID_SDK_ROOT
 export ANDROID_NDK_HOME="/usr/local/share/android-ndk"
@@ -160,12 +138,16 @@ source ~/.homebrew_api_token
 
 #
 # Customize to your needs...
-export PATH=.:/usr/local/share/npm/bin:$(brew --prefix ruby)/bin:$M2_HOME/bin:$PATH:$GROOVY_HOME/bin:$HOME/bin:$(brew --prefix go)/libexec/bin:/usr/local/share/pypy:~/.cargo/bin
+export PATH=.:/usr/local/share/npm/bin:$M2_HOME/bin:$PATH:$HOME/bin:/usr/local/opt/go/libexec/bin:/usr/local/share/pypy:~/.cargo/bin
+
+eval "$(jenv init -)"
 
 unsetopt share_history
 
+BREW_PREFIX=$(brew --prefix)
+
 # Autojump
-[[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
+[[ -s $BREW_PREFIX/etc/profile.d/autojump.sh ]] && . $BREW_PREFIX/etc/profile.d/autojump.sh
 
 
 # Give me my bash style incremental search
@@ -196,3 +178,8 @@ setopt inc_append_history
 # # Reloads the history whenever you use it
 setopt share_history
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# added by travis gem
+[ -f /Users/akaivola/.travis/travis.sh ] && source /Users/akaivola/.travis/travis.sh
