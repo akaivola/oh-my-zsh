@@ -12,7 +12,7 @@ DISABLE_AUTO_UPDATE="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git osx autojump)
+plugins=(git osx fasd zsh-autosuggestions per-directory-history)
 
 # Load default oh-my-zsh stuff
 source $ZSH/oh-my-zsh.sh
@@ -87,10 +87,6 @@ gitgrep() {
   git grep --color "$*" $(git rev-list --all)
 }
 
-f() {
-  find . -iname "$*" 2>/dev/null
-}
-
 # Speed up git completion
 # http://talkings.org/post/5236392664/zsh-and-slow-git-completion
 __git_files () {
@@ -147,7 +143,7 @@ unsetopt share_history
 BREW_PREFIX=$(brew --prefix)
 
 # Autojump
-[[ -s $BREW_PREFIX/etc/profile.d/autojump.sh ]] && . $BREW_PREFIX/etc/profile.d/autojump.sh
+#[[ -s $BREW_PREFIX/etc/profile.d/autojump.sh ]] && . $BREW_PREFIX/etc/profile.d/autojump.sh
 
 
 # Give me my bash style incremental search
@@ -183,3 +179,10 @@ setopt share_history
 
 # added by travis gem
 [ -f /Users/akaivola/.travis/travis.sh ] && source /Users/akaivola/.travis/travis.sh
+
+# history autosuggest color
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bold"
+
+# Docker buildkit and Docker compose buildkit support
+export DOCKER_BUILDKIT=1
+export COMPOSE_DOCKER_CLI_BUILD=1
