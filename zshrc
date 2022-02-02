@@ -1,4 +1,4 @@
-export PATH=/usr/local/sbin:/usr/local/bin:$PATH
+export PATH=/opt/homebrew/bin:/usr/local/sbin:/usr/local/bin:$PATH
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
@@ -118,12 +118,17 @@ export ACK_PAGER_COLOR='less -X -R -F'
 #export REBEL_HOME=/home/aki/Programs/jrebel
 export NODE_PATH="/usr/local/share/npm/lib/node_modules"
 export PYTHONPATH=/usr/local/lib/python:$PYTHONPATH
-export LEIN_JAVA_CMD=/usr/local/opt/drip/bin/drip
 export ANDROID_SDK_ROOT="/usr/local/share/android-sdk"
 export ANDROID_HOME=$ANDROID_SDK_ROOT
 export ANDROID_NDK_HOME="/usr/local/share/android-ndk"
 export NVM_DIR="$HOME/.nvm"
-. "/usr/local/opt/nvm/nvm.sh"
+
+BREW_PREFIX=$(brew --prefix)
+
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+. $(brew --prefix nvm) "/usr/local/opt/nvm/nvm.sh"
+
+. $BREW_PREFIX/etc/profile.d/z.sh
 
 source ~/.homebrew_api_token
 
@@ -140,7 +145,6 @@ eval "$(jenv init -)"
 
 unsetopt share_history
 
-BREW_PREFIX=$(brew --prefix)
 
 # Autojump
 #[[ -s $BREW_PREFIX/etc/profile.d/autojump.sh ]] && . $BREW_PREFIX/etc/profile.d/autojump.sh
