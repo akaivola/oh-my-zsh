@@ -190,3 +190,12 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bold"
 # Docker buildkit and Docker compose buildkit support
 export DOCKER_BUILDKIT=1
 export COMPOSE_DOCKER_CLI_BUILD=1
+
+# Npm analytics lib which phones home
+export SCARF_ANALYTICS=false
+
+export MCFLY_FUZZY=2
+export MCFLY_RESULTS=25
+export MCFLY_INTERFACE_VIEW=BOTTOM
+export MCFLY_RESULTS_SORT=LAST_RUN
+eval "$(mcfly init zsh)"
