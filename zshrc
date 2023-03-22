@@ -66,8 +66,9 @@ alias POST='http POST'
 alias DELETE='http DELETE'
 alias OPTIONS='http OPTIONS'
 
-# alias for emacs
 alias ec='emacsclient -c'
+alias vi='nvim'
+alias vim='nvim'
 
 alias ag='ag --pager less'
 
@@ -104,7 +105,7 @@ zstyle ':completion:*:approximate:*' max-errors 1 numeric
 # RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
-export EDITOR=/usr/bin/vim
+export EDITOR=/opt/homebrew/bin/nvim
 #export VISUAL=/usr/local/bin/mvim
 #export JAVA_HOME="$(/usr/libexec/java_home)"
 #export JDK_HOME=$JAVA_HOME
@@ -181,9 +182,6 @@ setopt share_history
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# added by travis gem
-[ -f /Users/akaivola/.travis/travis.sh ] && source /Users/akaivola/.travis/travis.sh
-
 # history autosuggest color
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bold"
 
@@ -199,3 +197,24 @@ export MCFLY_RESULTS=25
 export MCFLY_INTERFACE_VIEW=BOTTOM
 export MCFLY_RESULTS_SORT=LAST_RUN
 eval "$(mcfly init zsh)"
+
+export RIPGREP_CONFIG_PATH=~/.ripgreprc
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/akaivola/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/akaivola/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/akaivola/miniconda3/etc/profile.d/conda.sh" &
+    else
+        export PATH="/Users/akaivola/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+# Antidote
+source /opt/homebrew/opt/antidote/share/antidote/antidote.zsh
+antidote load
