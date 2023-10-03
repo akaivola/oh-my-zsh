@@ -1,4 +1,12 @@
 export PATH=/opt/homebrew/bin:/usr/local/sbin:/usr/local/bin:$PATH
+
+export HOMEBREW_PREFIX="/opt/homebrew";
+export HOMEBREW_CELLAR="/opt/homebrew/Cellar";
+export HOMEBREW_REPOSITORY="/opt/homebrew";
+export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}";
+export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:";
+export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
+
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
@@ -12,7 +20,7 @@ DISABLE_AUTO_UPDATE="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git osx fasd zsh-autosuggestions per-directory-history)
+plugins=(git zsh-autosuggestions per-directory-history)
 
 # Load default oh-my-zsh stuff
 source $ZSH/oh-my-zsh.sh
@@ -20,68 +28,7 @@ source $ZSH/oh-my-zsh.sh
 LANG="en_US.UTF-8"
 LC_CTYPE="en_US.UTF-8"
 
-alias sed=gsed
-alias g='nocorrect git'
-alias du='nocorrect du'
-alias gg='nocorrect gitgrep'
-alias ino='nocorrect ino'
-alias less='less -X -F -R'
-# PS
-alias psg="ps aux | grep "
-alias psr='ps aux | grep ruby'
-alias dfc='nocorrect dfc'
-
-# Show human friendly numbers and colors
-alias ll='ls -alGh'
-alias ls='ls -Gh'
-
-# show me files matching "ls grep"
-alias lsg='ll | grep'
-
-# Common shell functions
-alias tf='tail -f'
-alias l='less'
-alias lh='ls -alt | head' # see the last modified files
-alias screen='TERM=screen screen'
-alias ps='ps aux'
-# Global aliases
-alias -g ...='../..'
-alias -g ....='../../..'
-alias -g .....='../../../..'
-alias -g ......='../../../../..'
-alias -g .......='../../../../../..'
-alias -g ........='../../../../../../..'
-alias -g C='| wc -l'
-alias -g H='| head'
-alias -g L="| less"
-alias -g N="| /dev/null"
-alias -g S='| sort'
-alias -g G='| grep' # now you can do: ls foo G something
-alias -g T="| sed 's/\x1b\[[0-9]*m//g'"
-
-# http aliases
-alias GET='http GET'
-alias PUT='http PUT'
-alias POST='http POST'
-alias DELETE='http DELETE'
-alias OPTIONS='http OPTIONS'
-
-alias ec='emacsclient -c'
-alias vi='nvim'
-alias vim='nvim'
-
-alias ag='ag --pager less'
-
-# docker aliases
-alias dockercleancontainers="docker ps -a --no-trunc| grep 'Exit' | awk '{print \$1}' | xargs -L 1 docker rm"
-alias dockercleanimages="docker images -a --no-trunc | grep none | awk '{print \$3}' | xargs -L 1 docker rmi"
-alias dockerclean="dockercleancontainers && dockercleanimages"
-#alias dps="docker ps | q -bH1 'select c1, c2, c3 from -' | column -t"
-alias dps="docker ps | sed -e 's/  /\+/g' -e 's/CONTAINER ID/CONTAINER_ID/' | tr -s '+' '\t' | tail -n+2 | q -t 'select c1,substr(c7, 0, 40),c2,c6 from -' | column -t"
-alias drun="docker run -t -i --rm"
-
-#Emacs
-alias emc="emacsclient"
+source ~/.zshalias
 
 # Functions
 gitgrep() {
@@ -106,49 +53,21 @@ zstyle ':completion:*:approximate:*' max-errors 1 numeric
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 export EDITOR=/opt/homebrew/bin/nvim
-#export VISUAL=/usr/local/bin/mvim
-#export JAVA_HOME="$(/usr/libexec/java_home)"
-#export JDK_HOME=$JAVA_HOME
 export JAVA_OPTS="-Dfile.encoding=UTF8"
-#export GROOVY_HOME=$(brew --prefix groovy)/libexec
 export SCALA_HOME=/usr/local/opt/scala/2.13.1/libexec
-
 export M2_HOME=/usr/local/opt/maven/libexec
 export ACK_PAGER='less -X -F'
 export ACK_PAGER_COLOR='less -X -R -F'
-#export REBEL_HOME=/home/aki/Programs/jrebel
 export NODE_PATH="/usr/local/share/npm/lib/node_modules"
 export PYTHONPATH=/usr/local/lib/python:$PYTHONPATH
-export ANDROID_SDK_ROOT="/usr/local/share/android-sdk"
-export ANDROID_HOME=$ANDROID_SDK_ROOT
-export ANDROID_NDK_HOME="/usr/local/share/android-ndk"
-export NVM_DIR="$HOME/.nvm"
 
 BREW_PREFIX=$(brew --prefix)
 
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-. $(brew --prefix nvm) "/usr/local/opt/nvm/nvm.sh"
-
-. $BREW_PREFIX/etc/profile.d/z.sh
-
 source ~/.homebrew_api_token
 
-#export AWS_ACCESS_KEY="$(pass aws/aki/access_key)"\
-#       AWS_SECRET_KEY="$(pass aws/aki/secret_key)"\
-#       EC2_AMITOOL_HOME="$(brew --prefix ec2-ami-tools)/libexec"\
-#       EC2_HOME="$(brew --prefix ec2-api-tools)/libexec"
-
-#
-# Customize to your needs...
 export PATH=.:/usr/local/share/npm/bin:$M2_HOME/bin:$PATH:$HOME/bin:/usr/local/opt/go/libexec/bin:/usr/local/share/pypy:~/.cargo/bin
 
 eval "$(jenv init -)"
-
-unsetopt share_history
-
-
-# Autojump
-#[[ -s $BREW_PREFIX/etc/profile.d/autojump.sh ]] && . $BREW_PREFIX/etc/profile.d/autojump.sh
 
 
 # Give me my bash style incremental search
@@ -179,7 +98,6 @@ setopt inc_append_history
 # # Reloads the history whenever you use it
 setopt share_history
 
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # history autosuggest color
@@ -193,7 +111,8 @@ export COMPOSE_DOCKER_CLI_BUILD=1
 export SCARF_ANALYTICS=false
 
 export MCFLY_FUZZY=2
-export MCFLY_RESULTS=25
+#export MCFLY_DEBUG=0
+export MCFLY_RESULTS=50
 export MCFLY_INTERFACE_VIEW=BOTTOM
 export MCFLY_RESULTS_SORT=LAST_RUN
 eval "$(mcfly init zsh)"
@@ -215,6 +134,29 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-# Antidote
-source /opt/homebrew/opt/antidote/share/antidote/antidote.zsh
+# Antidote plugin manager
+source $(brew --prefix antidote)/share/antidote/antidote.zsh
 antidote load
+export PATH="$PATH:$HOME/.babashka/bbin/bin"
+
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(fnm env)"
+
+## SOK
+export PATH=$PATH:/Users/aki.kaivola/Development/SOK/ad-aws-login/bin
+export AWS_PAGER=
+export AWS_DEFAULT_REGION=eu-west-1
+export GPG_TTY=$(tty)
+
+## Rancher
+export PATH="/Users/aki.kaivola/.rd/bin:$PATH"
+
+autoload -U compinit
+compinit
+source <(jj util completion --zsh)
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/aki.kaivola/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)

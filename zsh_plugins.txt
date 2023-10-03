@@ -1,1 +1,2 @@
 bigH/git-fuzzy path:bin kind:path
+agkozak/zsh-z

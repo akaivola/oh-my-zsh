@@ -5,6 +5,7 @@ local user_host='%{$terminfo[bold]$fg[green]%}%n@%m%{$reset_color%}'
 local current_dir='%{$terminfo[bold]$fg[blue]%} %~%{$reset_color%}'
 # local rvm_ruby='%{$fg[red]%}‹$(rvm-prompt i v g)›%{$reset_color%}'
 local git_branch='$(git_prompt_info)%{$reset_color%}'
+local git_short_sha='$(git_prompt_short_sha)%{$reset_color%}'
 #
 # Show date on the right side of prompt
 strlen () {
@@ -41,11 +42,14 @@ the_date () {
   "${D}"
 }
 
-#PROMPT="${user_host} ${current_dir} ${rvm_ruby} ${git_branch}
-PROMPT="$fg[gray]${the_date} $reset_color%}${user_host} ${git_branch}${current_dir}
+#PROMPT="${user_host} ${current_dir} ${git_branch}
+PROMPT="${git_branch} ${git_short_sha} ${current_dir}
 %B$%b "
 RPS1="${return_code} ${preexec}"
 RPROMPT="${preexec}"
 
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[yellow]%}‹"
-ZSH_THEME_GIT_PROMPT_SUFFIX="› %{$reset_color%}"
+# colors from running 'spectrum_ls' in terminal
+ZSH_THEME_GIT_PROMPT_PREFIX="%{%B$FG[157]%}" # bright green
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} @"
+ZSH_THEME_GIT_PROMPT_SHA_BEFORE="%{$FG[197]%}" # bright red
+ZSH_THEME_GIT_PROMPT_SHA_AFTER="%{$reset_color%}"
